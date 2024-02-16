@@ -1,9 +1,9 @@
-import { IPostItem } from "./types";
+import { IKnitPostItem } from "./types";
 
 export async function postKnittingItem(
-  data: IPostItem,
+  data: IKnitPostItem,
   setKnittingItems,
-  knittingItems: Array<IPostItem>,
+  knittingItems: Array<IKnitPostItem>,
 ) {
   const postData = {
     item: data.item,
@@ -65,7 +65,7 @@ export async function getKnittingItems() {
   }
 }
 
-export async function editKnittingItem(item: IPostItem) {
+export async function editKnittingItem(item: IKnitPostItem) {
   try {
     const res = await fetch(
       `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${item.id}`,

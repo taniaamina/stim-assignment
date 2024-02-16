@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 //eslint-ignore
-import { IPostItem, Props } from "./types";
+import { IKnitPostItem, Props } from "./types";
 
 
 
 interface KnittingItemsContextValue {
-  knittingItems: Array<IPostItem>;
-  setKnittingItems: React.Dispatch<React.SetStateAction<IPostItem[]>>;
+  knittingItems: Array<IKnitPostItem>;
+  setKnittingItems: React.Dispatch<React.SetStateAction<IKnitPostItem[]>>;
 }
 
 const KnittingItemsContext = React.createContext<
@@ -14,7 +14,7 @@ const KnittingItemsContext = React.createContext<
 >(undefined);
 
 export const KnittingItemsProvider: React.FC<Props> = ({ children }) => {
-  const [knittingItems, setKnittingItems] = useState<IPostItem[]>([
+  const [knittingItems, setKnittingItems] = useState<IKnitPostItem[]>([
     { item: "", yarn: "", needles: "", link: "", id: "", isComplete: false },
   ]);
   return (

@@ -1,4 +1,4 @@
-export interface IPostItem {
+export interface IKnitPostItem {
   item: string;
   yarn: string;
   needles: string;

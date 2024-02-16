@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { deleteData, editKnittingItem } from "../functions.ts";
 import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 // eslint-disable-next-line
-import { IPostItem } from "../types";
+import { IKnitPostItem } from "../types";
 
-const KnitItem: React.FC<IPostItem> = (props) => {
+const KnitItem: React.FC<IKnitPostItem> = (props) => {
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
   const [isComplete, setIsComplete] = useState<boolean>(props.isComplete);
   const [showEdit, setShowEdit] = useState<boolean>(false);
@@ -15,7 +15,7 @@ const KnitItem: React.FC<IPostItem> = (props) => {
     setKnittingItems([...newList]);
   };
 
-  const editItem = (item: IPostItem) => {
+  const editItem = (item: IKnitPostItem) => {
     setShowEdit(!showEdit);
     editKnittingItem({ ...item, isComplete: isComplete });
     const knitItem = knittingItems.find((e) => e._id === props.id);

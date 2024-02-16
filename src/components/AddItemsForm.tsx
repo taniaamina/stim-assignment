@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 import { postKnittingItem } from "../functions.ts";
-import { IPostItem } from "../types";
+import { IKnitPostItem } from "../types";
 
-const data: IPostItem = {
+const data: IKnitPostItem = {
   item: "",
   yarn: "",
   needles: "",
@@ -13,7 +13,7 @@ const data: IPostItem = {
 };
 
 const AddItemsForm: React.FunctionComponent = () => {
-  const [formData, setFormData] = useState<IPostItem>(data);
+  const [formData, setFormData] = useState<IKnitPostItem>(data);
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
 
   const sendData = async () => {

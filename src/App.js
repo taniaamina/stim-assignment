@@ -5,14 +5,12 @@ import StoredItems from "./components/StoredItems.tsx";
 import { KnittingItemsProvider } from "./useKnittingItemsContext.tsx";
 
 const App = () => {
-
-  
   return (
     <KnittingItemsProvider>
-      <AddItemsForm/>
-      <StoredItems/>
+      <AddItemsForm />
+      <StoredItems />
     </KnittingItemsProvider>
   );
-}
+};
 
 export default App;

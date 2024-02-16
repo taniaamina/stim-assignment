@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 input {
-  @apply border border-black rounded-md
+  @apply border border-black rounded-md;
 }

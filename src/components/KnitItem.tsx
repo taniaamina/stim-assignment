@@ -4,30 +4,26 @@ import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 import { IPostItem } from "../types";
 
 
-const data = {isComplete: false};
 
-const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {   
+const KnitItem: React.FC<IPostItem> = (props: IPostItem) => {   
     const {knittingItems, setKnittingItems} = useKnittingItemsContext();
-    const [isComplete, setIsComplete] = useState<boolean>(item.isComplete)
+    const [isComplete, setIsComplete] = useState<boolean>(props.isComplete)
     const [showEdit, setShowEdit] = useState<boolean>(false)
-
-    console.log(item)
   
   const deleteItem = (id: string) => {
     deleteData(id)
-    const newList = knittingItems.filter((item) => item._id !== id)
+    const newList = knittingItems.filter((item) => item,id !== id)
     setKnittingItems([...newList])
   }
 
   const editItem = (item) => {
     setShowEdit(!showEdit)
     editKnittingItem({...item, 'isComplete': isComplete})
-    const knitItem = knittingItems.find(e => e._id === item.id)
-    console.log(knitItem)
+    const knitItem = knittingItems.find(e => e._id === props.id)
     knitItem.isComplete = isComplete
     const newArray = [...knittingItems]
     Object.assign(
-        newArray.find(({_id}) => _id === item.id),
+        newArray.find(({_id}) => _id === props.id),
         {knitItem}
     );
     setKnittingItems(newArray)
@@ -37,19 +33,19 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
 return (
     <div>
         <div className="flex">
-        {item &&
+        {props &&
             <div className="flex flex-col">
-                <p>Grej: {item.item}</p>
-                <p>Garn: {item.yarn}</p>
-                <p>Stickor: {item.needles}</p>
-                <p>Referens: <a className="underline" href={item.link}>{item.link}</a></p>
+                <p>Grej: {props.item}</p>
+                <p>Garn: {props.yarn}</p>
+                <p>Stickor: {props.needles}</p>
+                <p>Referens: <a className="underline" href={props.link}>{props.link}</a></p>
                 {showEdit &&
                 <div>
                     <div className="">
                     <label >Är du klar? </label>
                     <input             
                     type="checkbox"
-                    defaultChecked={item.isComplete}
+                    defaultChecked={props.isComplete}
                     onChange={() => setIsComplete((state) => !state)}
                     name="isComplete"/>
                 </div>
@@ -58,7 +54,7 @@ return (
                 </div> }
                 {!showEdit &&
                     <div className="flex gap-2">
-                    <button className="border border-black rounded-md py-2 px-3" onClick={() => {deleteItem(item.id)}}>Delete</button>
+                    <button className="border border-black rounded-md py-2 px-3" onClick={() => {deleteItem(props.id)}}>Delete</button>
                     <button className="border border-black rounded-md py-2 px-3" onClick={() =>{{setShowEdit(!showEdit)}}}>Edit</button>           
                     </div>
                 }

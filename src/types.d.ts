@@ -3,5 +3,6 @@ export interface IPostItem {
     yarn: string,
     needles: string,
     link: string,
-    _id: string
+    id: string,
+    isComplete: boolean
 }

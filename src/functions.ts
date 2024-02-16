@@ -64,21 +64,15 @@ export async function postKnittingItem(data, setKnittingItems, knittingItems) {
     
   }
 
-async function putData(id) {
-    if (id) {
-      const newData = {
-        title: put_title.current.value,
-        description: put_description.current.value,
-        published: put_published.current.checked,
-      };
-
+export async function editKnittingItem(item) {
+  alert(item.id)
       try {
-        const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${id}`, {
+        const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${item.id}`, {
           method: "put",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(newData),
+          body: JSON.stringify(item),
         });
 
         if (!res.ok) {
@@ -86,7 +80,7 @@ async function putData(id) {
           throw new Error(message);
         }
 
-        const data = await res.json();
+        const data = await res
 
         const result = {
           status: res.status + "-" + res.statusText,
@@ -94,11 +88,9 @@ async function putData(id) {
           data: data,
         };
 
-        setPutResult(fortmatResponse(result));
       } catch (err) {
-        setPutResult(err.message);
+        console.log(err)
       }
-    }
   }
   
 
@@ -112,7 +104,6 @@ export async function deleteData(id) {
           headers: { "Content-Type": res.headers.get("Content-Type") },
         };
 
-        console.log(result)
       
       } catch (err) {
         console.log(err.message);

@@ -5,7 +5,7 @@ import { IPostItem } from "../types";
 
 
 
-const data: IPostItem = { item: "", yarn: "", needles: "", link: "", _id: '' };
+const data: IPostItem = { item: "", yarn: "", needles: "", link: "", _id: "", img: '' };
 
 const AddItemsForm: React.FunctionComponent = () => {   
   const [formData, setFormData] = useState(data);

@@ -55,10 +55,6 @@ export async function getKnittingItems(setKnittingItems) {
       data: data,
       status: res.status,
       statusText: res.statusText,
-      headers: {
-        "Content-Type": res.headers.get("Content-Type"),
-        "Content-Length": res.headers.get("Content-Length"),
-      },
     };
 
     setKnittingItems(result.data);
@@ -68,7 +64,6 @@ export async function getKnittingItems(setKnittingItems) {
 }
 
 export async function editKnittingItem(item: IPostItem) {
-  alert(item.id);
   try {
     const res = await fetch(
       `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${item.id}`,
@@ -90,7 +85,6 @@ export async function editKnittingItem(item: IPostItem) {
 
     const result = {
       status: res.status + "-" + res.statusText,
-      headers: { "Content-Type": res.headers.get("Content-Type") },
       data: data,
     };
 
@@ -109,7 +103,6 @@ export async function deleteData(id: string) {
 
     const result = {
       status: res.status + "-" + res.statusText,
-      headers: { "Content-Type": res.headers.get("Content-Type") },
     };
 
     console.log(result.status)

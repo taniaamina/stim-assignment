@@ -15,7 +15,7 @@ const KnittingItemsContext = React.createContext<KnittingItemsContextValue
 
 
 export const KnittingItemsProvider: React.FC<Props> = ({children}) => {
-  const [knittingItems, setKnittingItems] = useState<IPostItem[]>([{item: '', yarn: '', needles: '', link: '', _id: ''}]);
+  const [knittingItems, setKnittingItems] = useState<IPostItem[]>([{item: '', yarn: '', needles: '', link: '', id: '', isComplete: false}]);
   return (
     <KnittingItemsContext.Provider value={{knittingItems, setKnittingItems}}>
       {children}

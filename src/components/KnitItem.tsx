@@ -10,6 +10,8 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
     const {knittingItems, setKnittingItems} = useKnittingItemsContext();
     const [isComplete, setIsComplete] = useState<boolean>(item.isComplete)
     const [showEdit, setShowEdit] = useState<boolean>(false)
+
+    console.log(item)
   
   const deleteItem = (id: string) => {
     deleteData(id)
@@ -18,13 +20,14 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
   }
 
   const editItem = (item) => {
-    setShowEdit(true)
+    setShowEdit(!showEdit)
     editKnittingItem({...item, 'isComplete': isComplete})
-    const knitItem = knittingItems.find(e => e.id === item.id)
+    const knitItem = knittingItems.find(e => e._id === item.id)
+    console.log(knitItem)
     knitItem.isComplete = isComplete
     const newArray = [...knittingItems]
     Object.assign(
-        newArray.find(({id}) => id === item.id),
+        newArray.find(({_id}) => _id === item.id),
         {knitItem}
     );
     setKnittingItems(newArray)

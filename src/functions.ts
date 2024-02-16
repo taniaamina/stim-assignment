@@ -4,7 +4,8 @@ export async function postKnittingItem(data, setKnittingItems, knittingItems) {
       item: data.item,
       yarn: data.yarn,
       needles: data.needles,
-      link: data.link
+      link: data.link,
+      isComplete: false
     };
 
     try {

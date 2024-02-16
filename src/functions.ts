@@ -34,13 +34,14 @@ export async function postKnittingItem(
       data: data,
     };
 
-    setKnittingItems([...knittingItems, result.data]);
+    return result
+
   } catch (err) {
     console.log("error");
   }
 }
 
-export async function getKnittingItems(setKnittingItems) {
+export async function getKnittingItems() {
   try {
     const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry`);
 
@@ -57,7 +58,8 @@ export async function getKnittingItems(setKnittingItems) {
       statusText: res.statusText,
     };
 
-    setKnittingItems(result.data);
+    return result
+
   } catch (err) {
     console.log(err.message);
   }

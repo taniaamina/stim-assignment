@@ -6,8 +6,14 @@ import KnitItem from "./KnitItem.tsx";
 const StoredItems: React.FunctionComponent = () => {
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
 
+
   useEffect(() => {
-    getKnittingItems(setKnittingItems);
+    const fetchData = async () => {
+    const result = await getKnittingItems();
+    setKnittingItems(result?.data)
+  
+    };
+    fetchData();
   }, []);
 
   return (

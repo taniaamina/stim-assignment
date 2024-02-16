@@ -16,9 +16,10 @@ const AddItemsForm: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<IPostItem>(data);
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
 
-  const sendData = () => {
-    postKnittingItem(formData, setKnittingItems, knittingItems);
+  const sendData = async () => {
+    const result = await postKnittingItem(formData, setKnittingItems, knittingItems);
     setFormData(data);
+    setKnittingItems([...knittingItems, result?.data]);
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

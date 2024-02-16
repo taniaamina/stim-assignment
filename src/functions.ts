@@ -7,7 +7,8 @@ export async function postKnittingItem(data: IPostItem, setKnittingItems, knitti
       yarn: data.yarn,
       needles: data.needles,
       link: data.link,
-      isComplete: false
+      isComplete: false,
+      id: ''
     };
 
     try {

@@ -12,7 +12,7 @@ const KnitItem: React.FC<IPostItem> = (props) => {
   
   const deleteItem = (id: string) => {
     deleteData(id)
-    const newList = knittingItems.filter((item) => item,id !== id)
+    const newList = knittingItems.filter((item) => item._id !== id)
     setKnittingItems([...newList])
   }
 

@@ -14,6 +14,7 @@ const AddItemsForm: React.FunctionComponent = () => {
 
   const sendData = () => {
     postKnittingItem(formData, setKnittingItems, knittingItems)
+    setFormData(data)
   }
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

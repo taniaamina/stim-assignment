@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {  deleteData, editKnittingItem } from "../functions.ts";
 import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
+// eslint-disable-next-line
 import { IPostItem } from "../types";
 
 

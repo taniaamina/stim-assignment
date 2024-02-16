@@ -1,5 +1,7 @@
-export async function postKnittingItem(data, setKnittingItems, knittingItems) {
 
+import { IPostItem } from "./types";
+
+export async function postKnittingItem(data: IPostItem, setKnittingItems, knittingItems: Array<IPostItem>) {
     const postData = {
       item: data.item,
       yarn: data.yarn,
@@ -64,7 +66,7 @@ export async function postKnittingItem(data, setKnittingItems, knittingItems) {
     
   }
 
-export async function editKnittingItem(item) {
+export async function editKnittingItem(item: IPostItem) {
   alert(item.id)
       try {
         const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${item.id}`, {
@@ -94,7 +96,7 @@ export async function editKnittingItem(item) {
   }
   
 
-export async function deleteData(id) {
+export async function deleteData(id: string) {
       try {
         const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${id}`, { method: "delete" });
 

@@ -5,7 +5,7 @@ import { IPostItem } from "../types";
 
 
 
-const KnitItem: React.FC<IPostItem> = (props: IPostItem) => {   
+const KnitItem: React.FC<IPostItem> = (props) => {   
     const {knittingItems, setKnittingItems} = useKnittingItemsContext();
     const [isComplete, setIsComplete] = useState<boolean>(props.isComplete)
     const [showEdit, setShowEdit] = useState<boolean>(false)
@@ -16,7 +16,7 @@ const KnitItem: React.FC<IPostItem> = (props: IPostItem) => {
     setKnittingItems([...newList])
   }
 
-  const editItem = (item) => {
+  const editItem = (item: IPostItem) => {
     setShowEdit(!showEdit)
     editKnittingItem({...item, 'isComplete': isComplete})
     const knitItem = knittingItems.find(e => e._id === props.id)
@@ -49,7 +49,7 @@ return (
                     onChange={() => setIsComplete((state) => !state)}
                     name="isComplete"/>
                 </div>
-                <button className="border border-black rounded-md py-2 px-3" onClick={() => {editItem(item)}}>Save</button>
+                <button className="border border-black rounded-md py-2 px-3" onClick={() => {editItem(props)}}>Save</button>
 
                 </div> }
                 {!showEdit &&

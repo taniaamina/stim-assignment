@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 import { postKnittingItem, getKnittingItems } from "../functions.ts";
-import { PostItem } from "../types";
+import { IPostItem } from "../types";
 
 
 
-const data: PostItem = { item: "", yarn: "", needles: "", link: "" };
+const data: IPostItem = { item: "", yarn: "", needles: "", link: "", _id: '' };
 
 const AddItemsForm: React.FunctionComponent = () => {   
   const [formData, setFormData] = useState(data);
-  const [knittingItems, setKnittingItems] = useState([])
-  
+  const {knittingItems, setKnittingItems} = useKnittingItemsContext();
+
 
   const sendData = () => {
-    postKnittingItem(formData)
+    postKnittingItem(formData, setKnittingItems, knittingItems)
   }
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
-  useEffect(() => {
-    getKnittingItems(setKnittingItems)
-  }, [])
-
 
   return (
     <div className="">

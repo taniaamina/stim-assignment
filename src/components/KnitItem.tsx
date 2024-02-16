@@ -12,7 +12,6 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
     const [showEdit, setShowEdit] = useState<boolean>(false)
   
   const deleteItem = (id: string) => {
-    alert(id)
     deleteData(id)
     const newList = knittingItems.filter((item) => item._id !== id)
     setKnittingItems([...newList])
@@ -21,7 +20,16 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
   const editItem = (item) => {
     setShowEdit(true)
     editKnittingItem({...item, 'isComplete': isComplete})
+    const knitItem = knittingItems.find(e => e.id === item.id)
+    knitItem.isComplete = isComplete
+    const newArray = [...knittingItems]
+    Object.assign(
+        newArray.find(({id}) => id === item.id),
+        {knitItem}
+    );
+    setKnittingItems(newArray)
   }
+
 
 return (
     <div>
@@ -32,7 +40,7 @@ return (
                 <p>Garn: {item.yarn}</p>
                 <p>Stickor: {item.needles}</p>
                 <p>Referens: <a className="underline" href={item.link}>{item.link}</a></p>
-                {showEdit || item.isComplete ?
+                {showEdit &&
                 <div>
                     <div className="">
                     <label >Är du klar? </label>
@@ -44,7 +52,7 @@ return (
                 </div>
                 <button className="border border-black rounded-md py-2 px-3" onClick={() => {editItem(item)}}>Save</button>
 
-                </div> : ''}
+                </div> }
                 {!showEdit &&
                     <div className="flex gap-2">
                     <button className="border border-black rounded-md py-2 px-3" onClick={() => {deleteItem(item.id)}}>Delete</button>

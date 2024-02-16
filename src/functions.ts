@@ -29,7 +29,6 @@ export async function postKnittingItem(data, setKnittingItems, knittingItems) {
 
       setKnittingItems([...knittingItems, result.data])
 
-      console.log(knittingItems)
 
     } catch (err) {
       console.log('error')

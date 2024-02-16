@@ -7,17 +7,10 @@ import { IPostItem } from "../types";
 const data = {isComplete: false};
 
 const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {   
-    console.log(item)
     const {knittingItems, setKnittingItems} = useKnittingItemsContext();
     const [formData, setFormData] = useState(data);
-    const [isComplete, setIsComplete] = useState<boolean>(false)
+    const [isComplete, setIsComplete] = useState<boolean>(item.isComplete)
     const [showEdit, setShowEdit] = useState<boolean>(false)
-
-    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
-    
   
   const deleteItem = (id: string) => {
     alert(id)
@@ -39,17 +32,17 @@ return (
                 <p>{item.yarn}</p>
                 <p>{item.needles}</p>
                 <p>{item.link}</p>
-                {showEdit && 
+                {showEdit || item.isComplete ?
                 <div>
                     <label >Did you finish?</label>
                     <input             
                     type="checkbox"
-                    defaultChecked={isComplete}
+                    defaultChecked={item.isComplete}
                     onChange={() => setIsComplete((state) => !state)}
                     name="isComplete"/>
                 <button onClick={() => {editItem(item)}}>Save</button>
 
-                </div>}
+                </div> : ''}
                 <button onClick={() => {deleteItem(item.id)}}>Delete</button>
                 <button onClick={() =>{{setShowEdit(!showEdit)}}}>Edit</button>           
             </div>

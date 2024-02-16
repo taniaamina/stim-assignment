@@ -20,7 +20,7 @@ return (
         <h2>Knitted items</h2>
         <div className="flex">
         {knittingItems.map((item, key) =>
-            <KnitItem key={key} item={item.item} link={item.link} needles={item.needles} id={item._id} yarn={item.yarn} />
+            <KnitItem key={key} item={item.item} link={item.link} needles={item.needles} id={item._id} yarn={item.yarn} isComplete={item.isComplete}/>
         )}
         </div>
     </div>

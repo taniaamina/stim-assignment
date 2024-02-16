@@ -19,6 +19,7 @@ const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {
   }
 
   const editItem = (item) => {
+    setShowEdit(true)
     editKnittingItem({...item, 'isComplete': isComplete})
   }
 
@@ -26,24 +27,30 @@ return (
     <div>
         <div className="flex">
         {item &&
-            <div>
-                <p>{item.item}</p>
-                <p>{item.yarn}</p>
-                <p>{item.needles}</p>
-                <p>{item.link}</p>
+            <div className="flex flex-col">
+                <p>Grej: {item.item}</p>
+                <p>Garn: {item.yarn}</p>
+                <p>Stickor: {item.needles}</p>
+                <p>Referens: <a className="underline" href={item.link}>{item.link}</a></p>
                 {showEdit || item.isComplete ?
                 <div>
-                    <label >Did you finish?</label>
+                    <div className="">
+                    <label >Är du klar? </label>
                     <input             
                     type="checkbox"
                     defaultChecked={item.isComplete}
                     onChange={() => setIsComplete((state) => !state)}
                     name="isComplete"/>
-                <button onClick={() => {editItem(item)}}>Save</button>
+                </div>
+                <button className="border border-black rounded-md py-2 px-3" onClick={() => {editItem(item)}}>Save</button>
 
                 </div> : ''}
-                <button onClick={() => {deleteItem(item.id)}}>Delete</button>
-                <button onClick={() =>{{setShowEdit(!showEdit)}}}>Edit</button>           
+                {!showEdit &&
+                    <div className="flex gap-2">
+                    <button className="border border-black rounded-md py-2 px-3" onClick={() => {deleteItem(item.id)}}>Delete</button>
+                    <button className="border border-black rounded-md py-2 px-3" onClick={() =>{{setShowEdit(!showEdit)}}}>Edit</button>           
+                    </div>
+                }
             </div>
             }
         </div>

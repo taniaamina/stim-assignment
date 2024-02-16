@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { postKnittingItem, getKnittingItems } from "../functions.ts";
+import { PostItem } from "../types";
 
+
+
+const data: PostItem = { item: "", yarn: "", needles: "", link: "" };
 
 const AddItemsForm: React.FunctionComponent = () => {   
-    const data = { item: "", yarn: "", needles: "", link: "" };
   const [formData, setFormData] = useState(data);
   const [knittingItems, setKnittingItems] = useState([])
   
@@ -67,16 +70,6 @@ const AddItemsForm: React.FunctionComponent = () => {
           <button type="button" onClick={() => {sendData()}}>Add project</button>
         </div>
       </form>
-      <h2>Knitted items</h2>
-      <div className="flex">
-      {knittingItems.map((item, key) =>
-      <div key={key}>
-      <p>{item.item}</p>
-      <p>{item.yarn}</p>
-      <p>{item.needles}</p>
-      <p>{item.link}</p>
-      </div>)}
-      </div>
     </div>
   );
 };

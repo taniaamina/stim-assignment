@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getKnittingItems, deleteData, editKnittingItem } from "../functions.ts";
+import React, { useState } from "react";
+import {  deleteData, editKnittingItem } from "../functions.ts";
 import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 import { IPostItem } from "../types";
 
@@ -8,7 +8,6 @@ const data = {isComplete: false};
 
 const KnitItem: React.FunctionComponent = (item: IPostItem, key) => {   
     const {knittingItems, setKnittingItems} = useKnittingItemsContext();
-    const [formData, setFormData] = useState(data);
     const [isComplete, setIsComplete] = useState<boolean>(item.isComplete)
     const [showEdit, setShowEdit] = useState<boolean>(false)
   

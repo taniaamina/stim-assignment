@@ -8,7 +8,6 @@ const data: IKnitPostItem = {
   yarn: "",
   needles: "",
   link: "",
-  id: "",
   isComplete: false,
 };
 
@@ -17,7 +16,7 @@ const AddItemsForm: React.FunctionComponent = () => {
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
 
   const sendData = async () => {
-    const result = await postKnittingItem(formData, setKnittingItems, knittingItems);
+    const result = await postKnittingItem(formData);
     setFormData(data);
     setKnittingItems([...knittingItems, result?.data]);
   };

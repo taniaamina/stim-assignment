@@ -2,8 +2,6 @@ import { IKnitPostItem } from "./types";
 
 export async function postKnittingItem(
   data: IKnitPostItem,
-  setKnittingItems,
-  knittingItems: Array<IKnitPostItem>,
 ) {
   const postData = {
     item: data.item,
@@ -11,7 +9,6 @@ export async function postKnittingItem(
     needles: data.needles,
     link: data.link,
     isComplete: false,
-    id: "",
   };
 
   try {
@@ -58,6 +55,7 @@ export async function getKnittingItems() {
       statusText: res.statusText,
     };
 
+
     return result
 
   } catch (err) {
@@ -65,10 +63,10 @@ export async function getKnittingItems() {
   }
 }
 
-export async function editKnittingItem(item: IKnitPostItem) {
+export async function editKnittingItem(id: string, item: IKnitPostItem) {
   try {
     const res = await fetch(
-      `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${item.id}`,
+      `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${id}`,
       {
         method: "put",
         headers: {

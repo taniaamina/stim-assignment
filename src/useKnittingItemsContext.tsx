@@ -1,22 +1,16 @@
-import React, { useState } from "react";
-//eslint-ignore
+import React, { createContext, useState, useContext, Dispatch, SetStateAction } from "react";
 import { IKnitPostItem, Props } from "./types";
 
-
-
 interface KnittingItemsContextValue {
-  knittingItems: Array<IKnitPostItem>;
-  setKnittingItems: React.Dispatch<React.SetStateAction<IKnitPostItem[]>>;
+  knittingItems: IKnitPostItem[];
+  setKnittingItems: Dispatch<SetStateAction<IKnitPostItem[]>>;
 }
 
-const KnittingItemsContext = React.createContext<
-  KnittingItemsContextValue | undefined
->(undefined);
+const KnittingItemsContext = createContext<KnittingItemsContextValue | undefined>(undefined);
 
 export const KnittingItemsProvider: React.FC<Props> = ({ children }) => {
-  const [knittingItems, setKnittingItems] = useState<IKnitPostItem[]>([
-    { item: "", yarn: "", needles: "", link: "", id: "", isComplete: false },
-  ]);
+  const [knittingItems, setKnittingItems] = useState<IKnitPostItem[]>([]);
+
   return (
     <KnittingItemsContext.Provider value={{ knittingItems, setKnittingItems }}>
       {children}
@@ -25,10 +19,10 @@ export const KnittingItemsProvider: React.FC<Props> = ({ children }) => {
 };
 
 export const useKnittingItemsContext = () => {
-  const knittingItemsContext = React.useContext(KnittingItemsContext);
-  if (KnittingItemsContext === undefined) {
+  const knittingItemsContext = useContext(KnittingItemsContext);
+  if (knittingItemsContext === undefined) {
     throw new Error(
-      "useKnittingItemsContext must be inside a KnittingItemsProvider",
+      "useKnittingItemsContext must be used within a KnittingItemsProvider"
     );
   }
   return knittingItemsContext;

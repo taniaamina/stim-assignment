@@ -3,10 +3,10 @@ export interface IKnitPostItem {
   yarn: string;
   needles: string;
   link: string;
-  id: string;
+  _id?: string;
   isComplete: boolean;
 }
 
 export interface Props {
     children: React.ReactNode;
-  }
+}

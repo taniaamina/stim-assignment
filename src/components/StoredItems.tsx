@@ -31,7 +31,7 @@ const StoredItems: React.FunctionComponent = () => {
                 item={item.item}
                 link={item.link}
                 needles={item.needles}
-                id={item._id}
+                _id={item._id}
                 yarn={item.yarn}
                 isComplete={item.isComplete}
               />
@@ -51,7 +51,7 @@ const StoredItems: React.FunctionComponent = () => {
                 item={item.item}
                 link={item.link}
                 needles={item.needles}
-                id={item._id}
+                _id={item._id}
                 yarn={item.yarn}
                 isComplete={item.isComplete}
               />

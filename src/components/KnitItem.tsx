@@ -17,17 +17,29 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
 
   const editItem = (item: IKnitPostItem) => {
     setShowEdit(!showEdit);
-    editKnittingItem({ ...item, isComplete: isComplete });
-    const knitItem = knittingItems.find((e) => e._id === props.id);
-    knitItem.isComplete = isComplete;
-    const newArray = [...knittingItems];
-    Object.assign(
-      newArray.find(({ _id }) => _id === props.id),
-      { knitItem },
-    );
-    setKnittingItems(newArray);
-  };
+  
+    editKnittingItem(item._id as string, { 
+      item: item.item,
+      yarn: item.yarn,
+      needles: item.needles,
+      link: item.link,
+      isComplete: isComplete 
+    });
 
+    const knitItem = knittingItems.find((e) => e._id === props._id);
+    if  (knitItem !== undefined) {
+     knitItem.isComplete = isComplete;
+
+     const newArray = knittingItems.map(item => {
+      if (item._id === props._id) {
+          return { ...knitItem }; 
+      }
+      return item;
+     });
+
+     setKnittingItems(newArray);
+    }
+  };
   return (
     <div>
       <div className="flex">
@@ -68,7 +80,7 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
                 <button
                   className="border border-black rounded-md py-2 px-3"
                   onClick={() => {
-                    deleteItem(props.id);
+                    deleteItem(props._id as string);
                   }}
                 >
                   Delete
@@ -88,7 +100,7 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
           </div>
         )}
       </div>
-    </div>
+ </div>
   );
 };
 export default KnitItem;

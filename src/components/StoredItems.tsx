@@ -1,30 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getKnittingItems } from "../functions.ts";
 import { useKnittingItemsContext } from "../useKnittingItemsContext.tsx";
 import KnitItem from "./KnitItem.tsx";
+import { IKnitPostItem } from "../types";
 
 const StoredItems: React.FunctionComponent = () => {
   const { knittingItems, setKnittingItems } = useKnittingItemsContext();
-
+  const [splitKnittingItems, setSplitKnittingItems] = useState<{
+    isCompleted: IKnitPostItem [];
+    isNotCompleted: IKnitPostItem[];
+  }>({
+    isCompleted: [],
+    isNotCompleted: []
+  });
 
   useEffect(() => {
     const fetchData = async () => {
     const result = await getKnittingItems();
-    result && setKnittingItems(result?.data)
-  
-    };
+    if (result) {
+     setKnittingItems(result?.data)
+    }
+  }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const splitKnittingItems = knittingItems.reduce((acc, obj) => {
+      if (obj.isComplete === true) {
+        acc.isCompleted.push(obj);
+      } else if (obj.isComplete === false) {
+        acc.isNotCompleted.push(obj);
+      }
+      return acc;
+    }, { isCompleted: [] as IKnitPostItem[], isNotCompleted: [] as IKnitPostItem[] });
+    setSplitKnittingItems(splitKnittingItems)
+  }, [knittingItems]);
 
   return (
     <div className="flex">
       <div className="basis-1/2 p-16">
-        {knittingItems.length > 0 && (
+        {splitKnittingItems?.isNotCompleted.length > 0 && (
           <h2 className="text-2xl">Dessa är på kö!</h2>
         )}
         <div className="flex flex-col">
-          {knittingItems
-            .filter((item) => item?.isComplete !== true)
+          {splitKnittingItems?.isNotCompleted
             .map((item, index) => (
               <KnitItem
                 key={index}
@@ -39,12 +58,11 @@ const StoredItems: React.FunctionComponent = () => {
         </div>
       </div>
       <div className="basis-1/2 p-16">
-        {knittingItems.length > 0 && (
+        {splitKnittingItems?.isCompleted.length > 0 && (
           <h2 className="text-2xl">...Och dessa är klara!</h2>
         )}
         <div className="flex flex-col">
-          {knittingItems
-            .filter((item) => item?.isComplete === true)
+          {splitKnittingItems?.isCompleted
             .map((item, index) => (
               <KnitItem
                 key={index}

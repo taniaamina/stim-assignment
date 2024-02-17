@@ -10,7 +10,7 @@ const StoredItems: React.FunctionComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
     const result = await getKnittingItems();
-    setKnittingItems(result?.data)
+    result && setKnittingItems(result?.data)
   
     };
     fetchData();

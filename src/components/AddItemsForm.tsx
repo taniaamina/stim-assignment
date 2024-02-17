@@ -28,11 +28,11 @@ const AddItemsForm: React.FunctionComponent = () => {
 
   return (
     <div className="pb-20 border-b border-black">
-      <h1 className="text-4xl  h-[30vh] flex items-center justify-center">
+      <h1 className="text-4xl  h-[30vh] px-8 text-center flex items-center justify-center">
         Hey there! Vad ska du sticka för något?
       </h1>
       <form className="">
-        <div className="flex gap-4 mb-4 items-center justify-center mb-12 pb-">
+        <div className="flex flex-col md:flex-row gap-4 mb-4 items-center justify-center mb-12 pb-">
           <div className="flex flex-col ">
             <label>Plagg eller grej</label>
             <input

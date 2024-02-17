@@ -41,22 +41,23 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
     }
   };
   return (
-    <div>
-      <div className="flex">
+      <div className="flex md:mb-8">
         {props && (
-          <div className="flex flex-col">
-            <p>Grej: {props.item}</p>
-            <p>Garn: {props.yarn}</p>
-            <p>Stickor: {props.needles}</p>
-            <p>
-              Referens:{" "}
-              <a className="underline" href={props.link}>
-                {props.link}
-              </a>
-            </p>
+            <div className="flex flex-col">
+              <div className="flex flex-col mb-4">
+                <p>Grej: {props.item}</p>
+                <p>Garn: {props.yarn}</p>
+                <p>Stickor: {props.needles}</p>
+                <p>
+                  Referens:{" "}
+                  <a className="underline" href={props.link}>
+                    {props.link}
+                  </a>
+                </p>
+              </div>
             {showEdit && (
               <div>
-                <div className="">
+                <div className="mb-2">
                   <label>Är du klar? </label>
                   <input
                     type="checkbox"
@@ -99,7 +100,6 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
             )}
           </div>
         )}
-      </div>
  </div>
   );
 };

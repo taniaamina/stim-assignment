@@ -37,10 +37,10 @@ const StoredItems: React.FunctionComponent = () => {
   }, [knittingItems]);
 
   return (
-    <div className="flex">
-      <div className="basis-1/2 p-16">
+    <div className="flex flex-col  md:flex-row mb-16">
+      <div className="md:basis-1/2 p-8 px-16 md:p-16">
         {splitKnittingItems?.isNotCompleted.length > 0 && (
-          <h2 className="text-2xl">Dessa är på kö!</h2>
+          <h2 className="text-2xl mb-4">Dessa är på kö!</h2>
         )}
         <div className="flex flex-col">
           {splitKnittingItems?.isNotCompleted
@@ -57,7 +57,7 @@ const StoredItems: React.FunctionComponent = () => {
             ))}
         </div>
       </div>
-      <div className="basis-1/2 p-16">
+      <div className="md:basis-1/2 px-16 md:p-16">
         {splitKnittingItems?.isCompleted.length > 0 && (
           <h2 className="text-2xl">...Och dessa är klara!</h2>
         )}

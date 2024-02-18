@@ -13,7 +13,7 @@ export async function postKnittingItem(
 
   try {
     const res = await fetch(`${process.env.REACT_APP_CRUD_ENDPOINT}/entry`, {
-      method: "post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,7 +34,7 @@ export async function postKnittingItem(
     return result
 
   } catch (err) {
-    console.log("error");
+    console.error('Error posting knitting item:', err.message);
   }
 }
 
@@ -59,7 +59,7 @@ export async function getKnittingItems() {
     return result
 
   } catch (err) {
-    console.log(err.message);
+    console.error('Error getting knitting items:', err.message);
   }
 }
 
@@ -68,7 +68,7 @@ export async function editKnittingItem(id: string, item: IKnitPostItem) {
     const res = await fetch(
       `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${id}`,
       {
-        method: "put",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -77,9 +77,10 @@ export async function editKnittingItem(id: string, item: IKnitPostItem) {
     );
 
     if (!res.ok) {
-      const message = `An error has occured: ${res.status} - ${res.statusText}`;
+      const message = res.status + ":" + res.statusText;
       throw new Error(message);
     }
+
 
     const data = await res;
 
@@ -88,9 +89,9 @@ export async function editKnittingItem(id: string, item: IKnitPostItem) {
       data: data,
     };
 
-    console.log(result.status)
+    return result
   } catch (err) {
-    console.log(err);
+    console.error('Error editing knitting item:', err.message);
   }
 }
 
@@ -98,16 +99,21 @@ export async function deleteData(id: string) {
   try {
     const res = await fetch(
       `${process.env.REACT_APP_CRUD_ENDPOINT}/entry/${id}`,
-      { method: "delete" },
+      { method: "DELETE" },
     );
+
+    if (!res.ok) {
+      const message = res.status + ":" + res.statusText;
+      throw new Error(message);
+    }
 
     const result = {
       status: res.status + "-" + res.statusText,
     };
 
-    console.log(result.status)
+    return result
 
   } catch (err) {
-    console.log(err.message);
+    console.error('Error deliting knitting item:', err.message);
   }
 }

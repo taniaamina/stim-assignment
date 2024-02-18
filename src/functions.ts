@@ -114,6 +114,6 @@ export async function deleteData(id: string) {
     return result
 
   } catch (err) {
-    console.error('Error deliting knitting item:', err.message);
+    console.error('Error deleting knitting item:', err.message);
   }
 }

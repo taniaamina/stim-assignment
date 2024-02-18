@@ -9,16 +9,18 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
   const [isComplete, setIsComplete] = useState<boolean>(props.isComplete);
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
-  const deleteItem = (id: string) => {
-    deleteData(id);
-    const newList = knittingItems.filter((item) => item._id !== id);
-    setKnittingItems([...newList]);
+  const deleteItem = async (id: string) => {
+    const result = await deleteData(id);
+    if (result !== undefined) {
+      const newList = knittingItems.filter((item) => item._id !== id);
+      setKnittingItems([...newList]);
+    }
   };
 
-  const editItem = (item: IKnitPostItem) => {
+  const editItem = async (item: IKnitPostItem) => {
     setShowEdit(!showEdit);
 
-    editKnittingItem(item._id as string, {
+   const result = await editKnittingItem(item._id as string, {
       item: item.item,
       yarn: item.yarn,
       needles: item.needles,
@@ -26,18 +28,21 @@ const KnitItem: React.FC<IKnitPostItem> = (props) => {
       isComplete: isComplete,
     });
 
-    const knitItem = knittingItems.find((e) => e._id === props._id);
-    if (knitItem !== undefined) {
-      knitItem.isComplete = isComplete;
+    if (result !== undefined) {
 
-      const newArray = knittingItems.map((item) => {
-        if (item._id === props._id) {
-          return { ...knitItem };
-        }
-        return item;
-      });
+      const knitItem = knittingItems.find((e) => e._id === props._id);
+      if (knitItem !== undefined) {
+        knitItem.isComplete = isComplete;
 
-      setKnittingItems(newArray);
+        const newArray = knittingItems.map((item) => {
+          if (item._id === props._id) {
+            return { ...knitItem };
+          }
+          return item;
+        });
+
+        setKnittingItems(newArray);
+      }
     }
   };
   return (
